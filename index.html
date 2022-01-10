@@ -66,7 +66,7 @@
     </style>
   </head>
   <body>
-    <h1 style="text-align: center">Made by Snowfluke</h1>
+    <h1 style="text-align: center">Made by Snowfluke aye</h1>
     <div class="container">
       <textarea
         cols="120"
@@ -90,7 +90,7 @@
         let removeStrip = filter2
           .split(",")
           .filter((el) => el)
-          .map((el) => el.replace(/-/g, "").replace(/\s/g, "").replace(/+/g, ""))
+          .map((el) => el.replace(/-/g, "").replace(/\s/g, "").replace(/\+/g, ""))
           .filter((el) => el.substring(0, 3) == "62");
         let result = removeStrip.join("\n");
         playground.value = result;
