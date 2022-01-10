@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>No-Wa-filter</title>
+    <style>
+      button {
+        background-color: #4caf50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #1a631d;
+      }
+
+      .container {
+        margin: 0 auto;
+        width: 80%;
+        display: grid;
+      }
+      /* Modern Browsers */
+      textarea::placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+
+      /* WebKit, Edge */
+      textarea::-webkit-input-placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+      /* Firefox 4-18 */
+      textarea:-moz-placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+      /* Firefox 19+ */
+      textarea::-moz-placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+      /* IE 10-11 */
+      textarea:-ms-input-placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+      /* Edge */
+      textarea::-ms-input-placeholder {
+        font-size: 1rem;
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">Made by Snowfluke</h1>
+    <div class="container">
+      <textarea
+        cols="120"
+        rows="10"
+        id="playground"
+        placeholder='Masukkan no WA disini. Contoh: <span title="+62 812-1303-5204, Anda">+62 812-1303-5204, Anda</span>'
+      ></textarea>
+      <br />
+      <button onclick="filterasi()">Filter</button>
+    </div>
+
+    <script>
+      let playground = document.querySelector("#playground");
+
+      function filterasi() {
+        let text = playground.value;
+        if (!text) return alert("Teks tidak boleh kosong");
+        let filter1 = text.split('Anda"')[0];
+        let filter2 = filter1.split('="')[1];
+        let removeStrip = filter2
+          .split(",")
+          .filter((el) => el)
+          .map((el) => el.replace(/-/g, "").replace(/\s/g, ""))
+          .filter((el) => el.substring(0, 3) == "+62");
+        let result = removeStrip.join("\n");
+        playground.value = result;
+      }
+    </script>
+  </body>
+</html>
