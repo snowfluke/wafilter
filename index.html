@@ -86,11 +86,12 @@
         if (!text) return alert("Teks tidak boleh kosong");
         let filter1 = text.split('Anda"')[0];
         let filter2 = filter1.split('="')[1];
+        if(!filter2) return alert("Teks invalid");
         let removeStrip = filter2
           .split(",")
           .filter((el) => el)
-          .map((el) => el.replace(/-/g, "").replace(/\s/g, ""))
-          .filter((el) => el.substring(0, 3) == "+62");
+          .map((el) => el.replace(/-/g, "").replace(/\s/g, "").replace(/+/g, ""))
+          .filter((el) => el.substring(0, 3) == "62");
         let result = removeStrip.join("\n");
         playground.value = result;
       }
