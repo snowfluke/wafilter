@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>No-Wa-filter</title>
+    <title>Whatsapp Filter</title>
     <style>
       button {
         background-color: #4caf50; /* Green */
@@ -25,6 +25,10 @@
         margin: 0 auto;
         width: 80%;
         display: grid;
+      }
+      
+      #check {
+        width: 100%;
       }
       /* Modern Browsers */
       textarea::placeholder {
@@ -77,9 +81,53 @@
       <br />
       <button onclick="filterasi()">Filter</button>
     </div>
+    <div class="container">
+      <p class='status'></p>
+      <input
+        type="text"
+        id="check"
+        onchange="check(event)"
+        placeholder='Masukkan link chat whatsapp'
+      />
+    </div>
 
     <script>
       let playground = document.querySelector("#playground");
+      let check = document.querySelector("#check");
+      let status = document.querySelector(".status");
+      let walink = 'https://chat.whatsapp.com/'
+      
+      function showText(msg){
+        status.innerText = msg
+      }
+      
+      async function getData(){
+        let data = JSON.parse(localStorage.getItem("walinkcollection")),
+        return data.collection
+      }
+      
+      async function setData(newVal){
+        let data = await getData()
+        data.collection.push(newVal)
+        let newData = JSON.stringify({collection: data.collection})
+        await localStorage.setItem('walinkcollection', newData)
+      }
+      
+      async function check(e){
+        showText("")
+        let val = e.target.value
+        if(!val.includes(walink)) return showText('Masukkan tidak valid")
+                                                  
+         try{
+            let allData = await getData()
+            if(allData.includes(val)) return showText('Link grup sudah pernah digunakan')
+            
+            showText('Belum digunakan & Ditambahkan ke Local Storage')
+            await setData(val)
+         } catch(e){
+            console.log(e.message)
+        }
+      }
 
       function filterasi() {
         let text = playground.value;
