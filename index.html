@@ -7,7 +7,7 @@
     <title>Whatsapp Filter</title>
     <style>
       button {
-        background-color: #4caf50; /* Green */
+        background-color: #4caf50;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -32,38 +32,38 @@
         height: 1.5rem;
         padding: 15px;
       }
-      /* Modern Browsers */
+      
       textarea::placeholder {
         font-size: 1rem;
         color: #9c9c9c;
         font-family: "Roboto", sans-serif;
       }
 
-      /* WebKit, Edge */
+     
       textarea::-webkit-input-placeholder {
         font-size: 1rem;
         color: #9c9c9c;
         font-family: "Roboto", sans-serif;
       }
-      /* Firefox 4-18 */
+      
       textarea:-moz-placeholder {
         font-size: 1rem;
         color: #9c9c9c;
         font-family: "Roboto", sans-serif;
       }
-      /* Firefox 19+ */
+      
       textarea::-moz-placeholder {
         font-size: 1rem;
         color: #9c9c9c;
         font-family: "Roboto", sans-serif;
       }
-      /* IE 10-11 */
+      
       textarea:-ms-input-placeholder {
         font-size: 1rem;
         color: #9c9c9c;
         font-family: "Roboto", sans-serif;
       }
-      /* Edge */
+      
       textarea::-ms-input-placeholder {
         font-size: 1rem;
         color: #9c9c9c;
@@ -116,6 +116,7 @@
       async function setData(newVal) {
         let data = await getData();
         data.collection.push(newVal);
+        
         let newData = JSON.stringify({ collection: data.collection });
         await localStorage.setItem("walinkcollection", newData);
       }
@@ -141,8 +142,10 @@
       function filterasi() {
         let text = playground.value;
         if (!text) return alert("Teks tidak boleh kosong");
+        
         let filter1 = text.split('Anda"')[0];
         let filter2 = filter1.split('="')[1];
+        
         if (!filter2) return alert("Teks invalid");
         let removeStrip = filter2
           .split(",")
@@ -152,6 +155,7 @@
           )
           .filter((el) => el.substring(0, 2) == "62");
         let result = removeStrip.join("\n");
+        
         playground.value = result;
       }
     </script>
